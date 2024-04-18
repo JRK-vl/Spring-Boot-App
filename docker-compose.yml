@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  postgresql:
+    image: postgres:12
+    restart: always
+    environment:
+      POSTGRES_PORT: 5432
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_USER: Valery
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  java_app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresql
+
+volumes:
+  postgres_data:
