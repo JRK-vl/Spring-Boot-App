@@ -1,0 +1,27 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="v2-1" author="Valery Lazavitsky">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <and>
+                    <columnExists tableName="comment" columnName="comment_text"/>
+                    <columnExists tableName="comment" columnName="author"/>
+                </and>
+            </not>
+        </preConditions>
+        <addColumn tableName="comment">
+            <column name="comment_text" type="text">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addColumn tableName="comment">
+            <column name="author" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>
